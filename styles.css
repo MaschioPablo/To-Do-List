@@ -1,0 +1,132 @@
+/* Reset de estilos */
+body, h1, ul, .background-image{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden; /* Evita el desplazamiento vertical */
+}
+.background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(''); /* Reemplaza 'tu-imagen-de-fondo.jpg' con la URL de tu imagen de fondo */
+    filter: blur(5px); /* Efecto de desenfoque */
+    z-index: -1; /* Sitúa la imagen detrás del contenido */
+}
+.container {
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo difuminado */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    padding: 20px;
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.task-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#new-task {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#add-task {
+    background-color: #ace7ff;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #fff5ba  ;
+    transition: background-color 0.2s, transform 0.2s;
+    backdrop-filter: blur(5px); /* Efecto de desenfoque en tareas */
+}
+
+.task input[type="text"] {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    overflow: hidden; /*Opción 1: Recorta el texto que se desborda */
+    white-space: nowrap; /* Opción 2: Mantiene el texto en una sola línea */
+    text-overflow: ellipsis; /* Opción*/ 
+}
+
+.task button {
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+    overflow: hidden; /* Recorta el contenido que se desborda */
+    white-space: nowrap; /* Mantiene el contenido en una sola línea */
+}
+
+.task button.complete {
+    background-color: #ace7ff;
+    color: #000000;
+}
+
+.task button.delete {
+    background-color: #ff5555;
+    color: #000000;
+}
+
+.task button.move-up,
+.task button.move-down {
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+}
+
+.task button.move-up:hover,
+.task button.move-down:hover {
+    background-color: #555;
+}
+
+.task:hover {
+    background-color: #f9f9f9;
+    transform: scale(1.02);
+}
+.completed {
+    background-color: #bffcc6; /* Cambia el fondo de la tarea completada a verde */
+}
