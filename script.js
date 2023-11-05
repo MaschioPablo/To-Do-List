@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     const taskList = document.getElementById("task-list");
     const newTaskInput = document.getElementById("new-task");
@@ -7,20 +8,34 @@ document.addEventListener("DOMContentLoaded", function () {
     const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     savedTasks.forEach(function (taskText) {
         const taskItem = createTaskElement(taskText);
-        taskList.appendChild(taskItem);
+        if (taskItem.classList.contains("completed")) {
+            taskList.appendChild(taskItem);
+        } else {
+            taskList.insertBefore(taskItem, taskList.firstChild);
+        }
     });
 
-    addTaskButton.addEventListener("click", function () {
+    function addTask() {
         const taskText = newTaskInput.value.trim();
         if (taskText !== "") {
             const taskItem = createTaskElement(taskText);
-            taskList.appendChild(taskItem);
+            taskList.insertBefore(taskItem, taskList.firstChild);
             newTaskInput.value = "";
 
             // Guardar la lista de tareas en el almacenamiento local
-            const tasks = [...savedTasks, taskText];
+            const tasks = [taskText, ...savedTasks];
             localStorage.setItem("tasks", JSON.stringify(tasks));
         }
+    }
+
+    newTaskInput.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            addTask();
+        }
+    });
+
+    addTaskButton.addEventListener("click", function () {
+        addTask();
     });
 
     function createTaskElement(text) {
@@ -40,6 +55,16 @@ document.addEventListener("DOMContentLoaded", function () {
         completeButton.addEventListener("click", function () {
             taskText.disabled = !taskText.disabled;
             taskItem.classList.toggle("completed");
+
+            if (taskItem.classList.contains("completed")) {
+                taskList.appendChild(taskItem);
+            } else {
+                taskList.insertBefore(taskItem, taskList.firstChild);
+            }
+
+            // Actualizar la lista de tareas en el almacenamiento local al completar una tarea
+            const tasks = savedTasks.filter(task => task !== text);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
         });
 
         deleteButton.addEventListener("click", function () {
@@ -88,11 +113,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const newIndex = index + direction;
         if (index >= 0 && newIndex >= 0 && newIndex < tasks.length) {
             const newTasks = [...tasks];
-            newTasks[index] = tasks[newIndex];
-            newTasks[newIndex] = taskText;
+            newTasks.splice(index, 1);
+            newTasks.splice(newIndex, 0, taskText);
             return newTasks;
         }
         return tasks;
     }
 });
-
