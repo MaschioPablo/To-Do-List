@@ -19,7 +19,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url(''); /* Reemplaza 'tu-imagen-de-fondo.jpg' con la URL de tu imagen de fondo */
+    background-image: url('background.jpg'); /* Reemplaza 'tu-imagen-de-fondo.jpg' con la URL de tu imagen de fondo */
     filter: blur(5px); /* Efecto de desenfoque */
     z-index: -1; /* Sitúa la imagen detrás del contenido */
 }
